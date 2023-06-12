@@ -147,9 +147,6 @@ int addGroceryItem2Cart(GroceryItem *product, Cart* Carts){
 
 //THis function simply displays the product with its name weight and price
 void ProductDisplay(GroceryItem *product) {
-	//if(heviestItem == product->weightOfproduct){
-		//printf("%s weighing %.3fkg with price %.2f\n", (*product).name, product->weightOfproduct, product -> price);
-		//}
 	printf("%s weighing %.3fkg with price %.2f\n", (*product).name, product->weightOfproduct, product -> price);
 }
 
@@ -239,16 +236,13 @@ void GeneratePackedBags(Cart *Carts){
 	int additional = initialValue;
 	float weightCheck2 = initialValue;
 	int totalProducts2 = initialValue;
-	//THis loop is very similar to the one above as this time it acctually adds the product to a bag 
+	//This loop is very similar to the one above as this time it acctually adds the product to a bag 
 	while(additional < (*Carts).groceryProductCount){
 		for(int q = additional; q < (*Carts).groceryProductCount; q++){
-		//printf("%f \n", weightCheck2);
 			if(((*Carts).Productloose[q] -> weightOfproduct) > maxWeight){
 				additional++;
 				continue;
 			}
-			//Checks the limits if a new product added would excceed the limits and if so will create a new bag 
-			//printf("%f \n", weightCheck2);
 			if(weightCheck2 + (*Carts).Productloose[q] -> weightOfproduct > maxWeight || totalProducts2 + possiblenextProduct > maxItems ){
 				bagbeingFilled = bagbeingFilled + 1;
 				weightCheck2 = (*Carts).Productloose[q]->weightOfproduct;
@@ -276,17 +270,6 @@ void GeneratePackedBags(Cart *Carts){
 	(*Carts).Bags = Bags;
 }
 
-/*void GeneratePackedBags(Cart *Carts){
-	int a;
-	int bagWeight = 0;
-	while(a < (*Carts).groceryProductCount){
-		if(bagWeight+ (*Carts).groceryCount > maxWeight){
-			bagCount++;
-		}else{
-		add2Bag
-		}
-	}
-}*/	
 
 int main(){
 
