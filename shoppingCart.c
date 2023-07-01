@@ -1,9 +1,9 @@
-//Name: Saad QAmar
-//StudentNumber: 101157363
+//Name: Saad Qamar
+
 #include <stdio.h>
 #include <stdlib.h>
 
-//THis is used to create a random order to pick items used lator on in the code
+//This is used to create a random order to pick items used later on in the code
 #include <time.h>
 
 //Initial definitions of the values provided in the assignment
@@ -19,7 +19,7 @@ int totalBags = initialValue;
 float totalWeightCheck = initialValue;
 int a = initialValue;
 
-//The first struct is the groceryitem which contains the name, weight and price of the product being choosen
+//The first struct is the grocery item which contains the name, weight and price of the product being chosen
 typedef struct GrocercyItem{
 	char *name;
 	float price;
@@ -28,7 +28,7 @@ typedef struct GrocercyItem{
 }GroceryItem;
 
 
-//The bag struct has an array of 25 that is the count of products as well as the actual number of the products. ALso containting the total weight of the bag with the products inside it
+//The bag struct has an array of 25 which is the count of products as well as the actual number of the products. Also containing the total weight of the bag with the products inside it
 typedef struct Bag {
 	float totalWeight;
 	int gProductCount;
@@ -46,7 +46,7 @@ typedef struct Cart{
 
 //The add2Bag function adds an item to a bag and returns 1 and 0 accordingly
 int add2Bag(GroceryItem *product, Bag **Bags){
-//The first condition checks if the max limit of items hass been reached
+//The first condition checks if the max limit of items has been reached
 	if((*Bags)->gProductCount + possiblenextProduct >= maxItems){
 		return 0;
 	}
@@ -59,7 +59,7 @@ int add2Bag(GroceryItem *product, Bag **Bags){
 	return 1;
 }
 
-//The remove from bag function removes an item from the bag depedning on if the product is in the bag
+//The remove from bag function removes an item from the bag depending on if the product is in the bag
 int remove4romBag(GroceryItem *product, Bag *Bags){
 	int a = initialValue;
 	//This loop keeps going until it loops the count of the products inside the bag
@@ -67,7 +67,7 @@ int remove4romBag(GroceryItem *product, Bag *Bags){
 		//This checks if the product is equal to the product in the bag as the certain index based on the loop
 		if((*Bags).ProductCount[a] == product){
 			int b = initialValue;
-			//This loop keeps going switch the spot of each item since one is being removed and decreasing the count by 1
+			//This loop keeps going switch the spot of each item since one is being removed and decrease the count by 1
 			for(b = a + possiblenextProduct; b < (*Bags).gProductCount; b++){
 				(*Bags).ProductCount[b - possiblenextProduct] = (*Bags).ProductCount[b];
 			} 
@@ -95,7 +95,7 @@ void deletePerish(Cart *Carts){
 			}
 			b++;
 		}	
-		//If there are no products left in a bag due to the removing of perishables the bag will be removed
+		//If there are no products left in a bag due to the removal of perishables the bag will be removed
 		if((*Carts).Bags[a]->gProductCount == 0){
 		//Freeing the memory of the bag that is being removed
 			free((*Carts).Bags[a]);
@@ -114,11 +114,11 @@ void deletePerish(Cart *Carts){
 	int mq = initialValue;
 	while(mq <(*Carts).groceryProductCount){
 		if((*Carts).Productloose[mq]->RefOrFre){
-		//As used before switches the position of each loose product
+		//As used before switch the position of each loose product
 			for( int sq = mq + 1; sq < (*Carts).groceryProductCount; sq++){
 				(*Carts).Productloose[sq-1] = (*Carts).Productloose[sq];
 			}
-			//Dcreases the count of the grocery product count each time a rpoduct is perishable 
+			//Decreases the count of the grocery product count each time a product is perishable 
 			--Carts->groceryProductCount;
 			mq--;
 		}
@@ -134,7 +134,7 @@ int addGroceryItem2Cart(GroceryItem *product, Cart* Carts){
 	if((*Carts).groceryProductCount + possiblenextProduct  >= maxCartCount){
 		return 0;
 	}
-	//If there is space to be added the item is added and the grocery product count is increased since the count of items has increased additonally also sets the product into product loose
+	//If there is space to be added the item is added and the grocery product count is increased since the count of items has increased additionally also sets the product into product lose
 	else{
 		Carts->Productloose[(*Carts).groceryProductCount] = product;
 		++(*Carts).groceryProductCount;
@@ -145,7 +145,7 @@ int addGroceryItem2Cart(GroceryItem *product, Cart* Carts){
 	}
 }
 
-//THis function simply displays the product with its name weight and price
+//This function simply displays the product with its name weight and price
 void ProductDisplay(GroceryItem *product) {
 	printf("%s weighing %.3fkg with price %.2f\n", (*product).name, product->weightOfproduct, product -> price);
 }
@@ -182,10 +182,10 @@ void CartDisplay(Cart *Carts){
 
 //This function helps put everything together and pack them together
 void GeneratePackedBags(Cart *Carts){
-	//This loops the amount of times as the number of iterms in the count
+	//This loops the number of times as the number of items in the count
 	while(a < (*Carts).groceryProductCount){
 	//If the weight of the next item goes over the max weight of the bag when added to the total weight of the bag at the time it continues
-	//This is mainly to check the amount of bags we need to allocate meory that will be needed
+	//This is mainly to check the amount of bags we need to allocate memory that will be needed
 		if(((*Carts).Productloose[a] -> weightOfproduct) > maxWeight){
 			a++;
 			continue;
@@ -236,7 +236,7 @@ void GeneratePackedBags(Cart *Carts){
 	int additional = initialValue;
 	float weightCheck2 = initialValue;
 	int totalProducts2 = initialValue;
-	//This loop is very similar to the one above as this time it acctually adds the product to a bag 
+	//This loop is very similar to the one above as this time it actually adds the product to a bag 
 	while(additional < (*Carts).groceryProductCount){
 		for(int q = additional; q < (*Carts).groceryProductCount; q++){
 			if(((*Carts).Productloose[q] -> weightOfproduct) > maxWeight){
@@ -250,19 +250,18 @@ void GeneratePackedBags(Cart *Carts){
 				totalProducts2 = 1;
 				add2Bag((*Carts).Productloose[q] ,&Bags[bagbeingFilled]);
 			}
-			//If the limits are not reached the product is simply added which leads the the change in the weight and the count of the total products in the bag
+			//If the limits are not reached the product is simply added which leads a change in the weight and the count of the total products in the bag
 			else{
 				add2Bag((*Carts).Productloose[q] , &Bags[bagbeingFilled]);
 				totalProducts2 = totalProducts2 + 1;
 				weightCheck2 = weightCheck2 + (*Carts).Productloose[q] -> weightOfproduct;
-				//printf("%f \n", weightCheck2);
 			}
 			//This for loop is used to switch around the loose products as many times as the count of the loose products
 			for(int s = q + 1; s < (*Carts).groceryProductCount; s++){
 				int index = s-1;
 				(*Carts).Productloose[index] = (*Carts).Productloose[s];
 			}
-			//Due to the above loop there will bea decrement
+			//Due to the above loop there will be a decrement
 			--(*Carts).groceryProductCount;
 			q--;
 		}
@@ -293,7 +292,7 @@ int main(){
 		testItems[a].RefOrFre = sampleItemPerish[a];
 	}	
 
-	//Random generator for the 12 items to be choosen 50 times
+	//Random generator for the 12 items to be chosen 50 times
 	srand(time(NULL));
 	int b;
 	for (b = 0; b < 50; b++) {
@@ -316,7 +315,7 @@ int main(){
 	printf("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n");
 	CartDisplay(&TheFinalCart);
 	
-	//This functions removes all the perishables from the bags
+	//This function removes all the perishables from the bags
 	deletePerish(&TheFinalCart);
 	
 	//Output for all the bags after the perishables have been removed
